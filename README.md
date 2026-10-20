@@ -46,8 +46,11 @@ We start from fresh LoRA weights, using importance-sampling loss and Adam at `1e
 
 Performance decreased. One trained-policy rollout exhausted its action limit without submitting. The experiment demonstrates execution and optimization, without evidence of a training gain.
 
+### Limitations and Possible Explanations
+
 - **Outcome-only feedback:** one trajectory advantage reaches every generated token. Without process rewards, successful trajectories can also reinforce incorrect attempts and redundant queries.
 - **Small rollout groups:** four training samples give noisy advantages; four evaluations cannot establish a reliable performance change or generalization.
+- **Possible policy drift:** LoRA updates may alter prior reasoning behavior. Broader evaluations are needed to test whether general reasoning was affected.
 
 ## Files and verification
 
