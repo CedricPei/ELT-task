@@ -1,0 +1,99 @@
+{
+  "task": "One official ELT-Bench trains task",
+  "model": "Qwen/Qwen3.6-35B-A3B",
+  "warehouse": "Snowflake",
+  "run_started_utc": "2026-10-20T13:22:42.530937+00:00",
+  "run_completed_utc": "2026-10-20T13:30:39.159864+00:00",
+  "source_sha256": {
+    "src/elt_tinker/__init__.py": "c6f9759e9099bfee64bf25744c216a1573eb5c3fce98c5137f17ce2a6dc7b435",
+    "src/elt_tinker/budget.py": "ac55b074864460090757292459fd9a3dfa21908523600fd30653e5d3dddf143b",
+    "src/elt_tinker/config.py": "0e528904cca3b3028077f56ae20bf96870fb4e68943cfac8f8ab0031b6cdf6d1",
+    "src/elt_tinker/environment.py": "7dddb0e38c7643346838695b51a03f8edcb50829aad917d9a6504f4dd686c466",
+    "src/elt_tinker/provenance.py": "4ad577583b33e5fca5dac829d1eebc1e95c03b80f6f6ce5e2fa0e1d3e4dd9d2f",
+    "src/elt_tinker/task.py": "15dbaa8fc74991352a4034f7e6bd18144734c3af270f919fc3cc5999bb1d66ec",
+    "src/elt_tinker/train.py": "66605adb2918846001646d1f9011d626596698402701fcef819b1e84734d9015",
+    "src/elt_tinker/warehouse.py": "be5fc598c38783ba9e8c4a480f43e603e99ab10cf1cafbc045318f137a62f153"
+  },
+  "source_revisions": {
+    "ELT-Bench": "fcf3129df49ce5ce63ff46b2bbbbba1eaf9ec055",
+    "tinker-cookbook": "df2aff6b3992c7bd5dddece2397093f95dd5aed3"
+  },
+  "data": {
+    "dataset": "tttjjj/elt_bench",
+    "dataset_revision": "52a48541547a4340e19e54386350740acca80146",
+    "digests": {
+      "train.csv": "f3ed8d5d62147ae2f51accd86f4d960602deb5e5c0acb8313b084eceacb0ecf9",
+      "cars.csv": "d36ba10381d12eef1079d830f391f28c38158c0376c6a8d317c1102efcbfc3f8",
+      "reference": "9b11c739c45c2ff131f99e06902bebe2a5ec44545d1934a534627bd0d7985996"
+    },
+    "cars_archive_member": "data/trains/cars.csv",
+    "official_source_rows": {
+      "train": 20,
+      "cars": 63
+    }
+  },
+  "reward": "0.8 * A + 0.2 * B if valid; otherwise 0; A = sum(a_j) / max(K, C - 1); B = int(official_full_pass)",
+  "training": {
+    "batches": 2,
+    "rollouts_per_batch": 4,
+    "total_rollouts": 8,
+    "optimizer_updates": 2,
+    "skipped_batches": [],
+    "learning_rate": 1e-05,
+    "temperature": 0.8,
+    "lora_rank": 16,
+    "lora_seed": 7,
+    "loss": "importance_sampling",
+    "optimizer": "Adam",
+    "optimizer_parameters": {
+      "learning_rate": 1e-05,
+      "beta1": 0.9,
+      "beta2": 0.95,
+      "eps": 1e-12,
+      "weight_decay": 0.0,
+      "grad_clip_norm": 0.0
+    },
+    "initial_sampler": "tinker://e81bce78-7d7d-5753-9236-14bb0b812add:train:0/sampler_weights/initial",
+    "final_sampler": "tinker://e81bce78-7d7d-5753-9236-14bb0b812add:train:0/sampler_weights/step_2"
+  },
+  "evaluation": {
+    "rollouts_per_policy": 4,
+    "total_rollouts": 8,
+    "temperature": 0.3,
+    "same_sampling_seeds": true,
+    "before": {
+      "rollouts": 4,
+      "submitted": 4,
+      "passed": 3,
+      "mean_reward": 0.91
+    },
+    "after": {
+      "rollouts": 4,
+      "submitted": 3,
+      "passed": 1,
+      "mean_reward": 0.5800000000000001
+    },
+    "paired_improvements": 0,
+    "paired_regressions": 2
+  },
+  "total_model_rollouts": 16,
+  "intermediate_evaluations": 0,
+  "replacement_rollouts": 0,
+  "extra_posthoc_cloud_execution_replays": 0,
+  "all_rollout_records_retained": true,
+  "source_unchanged": true,
+  "performance_improvement_claim": false,
+  "reflection": [
+    "Outcome-only rewards assign the same advantage to every generated token; there is no process reward identifying which intermediate action helped.",
+    "Four training rollouts per batch and four paired evaluations per policy provide noisy estimates and do not establish a reliable performance change."
+  ],
+  "offline_validation": {
+    "submitted_rollouts_replayed": 15,
+    "independent_cell_scores_match": true,
+    "training_token_alignment_verified": true
+  },
+  "cost_controls": {
+    "cumulative_model_reservation_limit_usd": 10,
+    "warehouse_credit_quota": 3
+  }
+}

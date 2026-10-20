@@ -1,0 +1,12 @@
+{
+  "external_services_budget_usd": 100.0,
+  "initial_experiment_budget_usd": 10.0,
+  "warehouse": "ELT_TINKER_WH",
+  "warehouse_size": "XSMALL",
+  "warehouse_auto_suspend_seconds": 60,
+  "warehouse_credit_quota": 3,
+  "source_revisions": {
+    "ELT-Bench": "fcf3129df49ce5ce63ff46b2bbbbba1eaf9ec055",
+    "tinker-cookbook": "df2aff6b3992c7bd5dddece2397093f95dd5aed3"
+  }
+}
